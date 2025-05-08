@@ -119,10 +119,3 @@ async function squareAsync(n: number): Promise<number> {
   });
 }
 
-squareAsync(4)
-  .then((result) => console.log(result)) // Output after 1s: 16
-  .catch((err) => console.error(err.message));
-
-squareAsync(-3)
-  .then((result) => console.log(result))
-  .catch((err) => console.error(err.message)); // Output: Error: Negative number not allowed

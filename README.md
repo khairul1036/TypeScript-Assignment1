@@ -10,7 +10,7 @@
 
 <hr />
 
-<h2>🔹 <code>any</code> – <em>The Escape Hatch</em></h2>
+<h2><code>any</code> – <em>The Escape Hatch</em></h2>
 
 <h3>What is <code>any</code>?</h3>
 <p>The <code>any</code> type disables all type checking for a variable. When a variable is declared with the <code>any</code> type, TypeScript essentially treats it like a normal JavaScript variable.</p>
@@ -33,12 +33,12 @@ value = { name: "A" }; // OK
 console.log(value.toFixed()); // No compile-time error, but may crash if value is not a number
 </code></pre>
 
-<h4>⚠️ Caution</h4>
+<h4>Caution</h4>
 <p>Avoid using <code>any</code> when possible. It bypasses all benefits of TypeScript’s static type checking.</p>
 
 <hr />
 
-<h2>🔹 <code>unknown</code> – <em>Type-Safe Counterpart to <code>any</code></em></h2>
+<h2><code>unknown</code> – <em>Type-Safe Counterpart to <code>any</code></em></h2>
 
 <h3>What is <code>unknown</code>?</h3>
 <p>The <code>unknown</code> type is similar to <code>any</code> in that it can hold any value. However, it is much safer because you must perform some kind of type checking or assertion before using it.</p>
@@ -64,12 +64,12 @@ if (typeof value === "string") {
 }
 </code></pre>
 
-<h4>✅ Safer than <code>any</code></h4>
+<h4>Safer than <code>any</code></h4>
 <p>Unlike <code>any</code>, <code>unknown</code> enforces type checks, reducing the risk of runtime errors.</p>
 
 <hr />
 
-<h2>🔹 <code>never</code> – <em>The Impossible Type</em></h2>
+<h2><code>never</code> – <em>The Impossible Type</em></h2>
 
 <h3>What is <code>never</code>?</h3>
 <p>The <code>never</code> type represents values that never occur. A function that <strong>never returns</strong> (for example, one that always throws an error or loops forever) is inferred to return <code>never</code>.</p>
@@ -109,7 +109,7 @@ function getArea(shape: Shape) {
 }
 </code></pre>
 
-<h4>🔒 Helps with Safety</h4>
+<h4>Helps with Safety</h4>
 <p>Using <code>never</code> ensures that you handle all possible cases explicitly, making your code more robust.</p>
 
 <hr />
@@ -128,21 +128,21 @@ function getArea(shape: Shape) {
   <tbody>
     <tr>
       <td>Accepts any value?</td>
-      <td>✅ Yes</td>
-      <td>✅ Yes</td>
-      <td>❌ No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>No</td>
     </tr>
     <tr>
       <td>Type checking?</td>
-      <td>❌ No</td>
-      <td>✅ Requires checking</td>
-      <td>✅ Used to ensure unreachable code</td>
+      <td>No</td>
+      <td>Requires checking</td>
+      <td>Used to ensure unreachable code</td>
     </tr>
     <tr>
       <td>Compile-time safety</td>
-      <td>❌ Unsafe</td>
-      <td>✅ Safe</td>
-      <td>✅ Safe</td>
+      <td>Unsafe</td>
+      <td>Safe</td>
+      <td>Safe</td>
     </tr>
     <tr>
       <td>Common use cases</td>
@@ -152,9 +152,9 @@ function getArea(shape: Shape) {
     </tr>
     <tr>
       <td>Allows property access?</td>
-      <td>✅ Any property</td>
-      <td>❌ Must check type first</td>
-      <td>❌ No usage possible</td>
+      <td>Any property</td>
+      <td>Must check type first</td>
+      <td>No usage possible</td>
     </tr>
   </tbody>
 </table>
