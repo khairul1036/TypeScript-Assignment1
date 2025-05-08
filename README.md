@@ -2,8 +2,6 @@
 
 ## 1️⃣ Explain the difference between <code>any</code>, <code>unknown</code>, and <code>never</code> types in TypeScript.
 
-<h1>Understanding <code>any</code>, <code>unknown</code>, and <code>never</code> in TypeScript</h1>
-
 <p>TypeScript is a statically typed superset of JavaScript that provides powerful tools for improving code quality and maintainability. Among these tools are special types like <code>any</code>, <code>unknown</code>, and <code>never</code>.</p>
 
 <p>Though they may seem similar at first glance, each of these types serves a very different purpose in the TypeScript type system.</p>
@@ -116,7 +114,7 @@ function getArea(shape: Shape) {
 
 <hr />
 
-<h2>🔁 Quick Comparison Table</h2>
+<h2>Quick Comparison Table</h2>
 
 <table>
   <thead>
@@ -162,20 +160,184 @@ function getArea(shape: Shape) {
 </table>
 
 <hr />
+<hr />
 
-<h2>✅ Conclusion</h2>
 
-<p>Here’s a quick summary of when to use each:</p>
 
-<ul>
-  <li>Use <strong><code>any</code></strong> when you need to bypass the type system (with caution).</li>
-  <li>Use <strong><code>unknown</code></strong> when accepting values of any type but want to enforce safety.</li>
-  <li>Use <strong><code>never</code></strong> to represent unreachable code paths or functions that never return.</li>
-</ul>
 
-<p>Understanding these types will help you write safer, more maintainable, and more predictable TypeScript code.</p>
+## 2️⃣ Provide an example of using union and intersection types in TypeScript.
+
+
+<p>TypeScript provides developers with powerful type composition tools: <strong>union types</strong> and <strong>intersection types</strong>. These allow you to create more expressive, flexible, and type-safe code, especially when working with multiple possible shapes or behaviors in your data.</p>
+
+<p>In this guide, we’ll break down the differences between union and intersection types, explain when to use them, and provide practical code examples.</p>
 
 <hr />
 
-<h3>💡 Tip</h3>
-<p>Prefer <code>unknown</code> over <code>any</code> when dealing with dynamic content like parsed JSON, and always leverage <code>never</code> for exhaustive checking to future-proof your code.</p>
+<h2>Union Types (<code>|</code>)</h2>
+
+<h3>What is a Union Type?</h3>
+<p>A <strong>union type</strong> represents a value that can be <strong>one of several types</strong>. You define it using the pipe (<code>|</code>) operator.</p>
+<p><em>It’s like saying: “This variable can be type A <strong>or</strong> type B.”</em></p>
+
+<h3>When to Use</h3>
+<ul>
+  <li>When a variable can have multiple possible types.</li>
+  <li>When handling different input types or data shapes.</li>
+  <li>In discriminated unions for type-safe pattern matching.</li>
+</ul>
+
+<h3>🧪 Example</h3>
+<pre><code class="language-ts">
+type StringOrNumber = string | number;
+
+let value: StringOrNumber;
+
+value = "Hello";  // ✅ OK
+value = 123;      // ✅ OK
+// value = true;  // ❌ Error: boolean is not assignable
+
+function printId(id: string | number) {
+  if (typeof id === "string") {
+    console.log("ID (string):", id.toUpperCase());
+  } else {
+    console.log("ID (number):", id.toFixed(2));
+  }
+}
+
+printId("abc");
+printId(42.6789);
+</code></pre>
+
+<h3>Benefits of Union Types</h3>
+<ul>
+  <li>Allows flexible inputs without giving up type safety.</li>
+  <li>Encourages proper type narrowing with <code>typeof</code>, <code>in</code>, or custom type guards.</li>
+</ul>
+
+<hr />
+
+<h2>Intersection Types (<code>&</code>)</h2>
+
+<h3>What is an Intersection Type?</h3>
+<p>An <strong>intersection type</strong> combines <strong>multiple types into one</strong>, requiring the value to satisfy <strong>all</strong> the types simultaneously. You define it using the ampersand (<code>&</code>) operator.</p>
+<p><em>It’s like saying: “This variable must be type A <strong>and</strong> type B.”</em></p>
+
+<h3>When to Use</h3>
+<ul>
+  <li>When merging multiple object types together.</li>
+  <li>When building types that combine behaviors (like interfaces).</li>
+  <li>When modeling components with multiple roles.</li>
+</ul>
+
+<h3>Example</h3>
+<pre><code class="language-ts">
+type Person = {
+  name: string;
+  age: number;
+};
+
+type Employee = {
+  employeeId: string;
+  department: string;
+};
+
+type EmployeeDetails = Person & Employee;
+
+const employee: EmployeeDetails = {
+  name: "Alice",
+  age: 30,
+  employeeId: "E123",
+  department: "Engineering"
+};
+</code></pre>
+
+<h3>Benefits of Intersection Types</h3>
+<ul>
+  <li>Enables powerful composition of complex object types.</li>
+  <li>Useful in component systems, mixins, and higher-order functions.</li>
+</ul>
+
+<hr />
+
+<h2>Comparison Table</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th><code>Union (A &#124; B)</code></th>
+      <th><code>Intersection (A &amp; B)</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Meaning</td>
+      <td>Value can be <strong>A or B</strong></td>
+      <td>Value must be <strong>A and B</strong></td>
+    </tr>
+    <tr>
+      <td>Combines</td>
+      <td>Alternatives</td>
+      <td>Requirements</td>
+    </tr>
+    <tr>
+      <td>Syntax</td>
+      <td><code>type AorB = A | B</code></td>
+      <td><code>type AandB = A & B</code></td>
+    </tr>
+    <tr>
+      <td>Common Use Cases</td>
+      <td>Flexible inputs, overloads</td>
+      <td>Object merging, trait mixing</td>
+    </tr>
+    <tr>
+      <td>Example Types</td>
+      <td><code>string | number</code></td>
+      <td><code>{ name: string } & { age: number }</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2>Real-World Scenario</h2>
+
+<h3>Union Type Example</h3>
+<pre><code class="language-ts">
+type APIResponse = 
+  | { status: "success"; data: string[] }
+  | { status: "error"; error: string };
+
+function handleResponse(res: APIResponse) {
+  if (res.status === "success") {
+    console.log("Data:", res.data);
+  } else {
+    console.error("Error:", res.error);
+  }
+}
+</code></pre>
+
+<h3>Intersection Type Example</h3>
+<pre><code class="language-ts">
+interface Logger {
+  log(message: string): void;
+}
+
+interface Serializable {
+  serialize(): string;
+}
+
+type Service = Logger & Serializable;
+
+const service: Service = {
+  log(msg) {
+    console.log("Log:", msg);
+  },
+  serialize() {
+    return JSON.stringify({ message: "Hello" });
+  }
+};
+</code></pre>
+
+<hr />
